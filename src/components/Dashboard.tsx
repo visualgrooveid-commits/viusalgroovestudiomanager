@@ -80,13 +80,15 @@ export default function Dashboard({ bookings, onSelectBooking, onNavigateToView,
     (b) => b.eventDate > todayStr && b.status !== "Completed" && b.status !== "Cancelled"
   );
 
-  const pendingDP = bookings.filter(
-    (b) => !b.payments.dpPaid && b.status !== "Cancelled" && b.status !== "Completed"
-  );
-
   const pendingFullPayment = bookings.filter(
     (b) => b.payments.dpPaid && !b.payments.fullPaid && b.status !== "Cancelled"
   );
+
+  const pendingReceivableAmount = pendingFullPayment.reduce((sum, b) => {
+    const totalDue = Math.max(0, b.price - (b.discount || 0));
+    const remaining = Math.max(0, totalDue - b.payments.dpAmount);
+    return sum + remaining;
+  }, 0);
 
   const projectsInEditing = bookings.filter((b) => b.status === "Editing");
   const completedProjects = bookings.filter((b) => b.status === "Completed");
@@ -223,11 +225,11 @@ export default function Dashboard({ bookings, onSelectBooking, onNavigateToView,
             </div>
           </div>
           <div className="mt-4 flex items-baseline space-x-2">
-            <span className="text-3xl font-semibold tracking-tight font-sans text-slate-900">
-              {pendingDP.length}
+            <span className="text-2xl font-semibold tracking-tight font-sans text-slate-900">
+              {formatRupiah(pendingReceivableAmount)}
             </span>
             <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded font-medium border border-amber-100">
-              {isEn ? "Inquiries" : "Klien Baru"}
+              {pendingFullPayment.length} {isEn ? "Clients" : "Klien"}
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-2">
