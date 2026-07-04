@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global safety net catch-all default-deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common security helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // Rules for individual tenant resources
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+
+      match /bookings/{bookingId} {
+        allow read, write: if isOwner(uid);
+      }
+
+      match /settings/{settingsId} {
+        allow read, write: if isOwner(uid);
+      }
+
+      match /packages/{packageId} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+  }
+}

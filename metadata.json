@@ -1,0 +1,6 @@
+{
+  "name": "VisualGroove Studio Management System",
+  "description": "Premium workflow and booking management system for creative photography studios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

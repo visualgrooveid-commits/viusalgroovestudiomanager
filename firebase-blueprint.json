@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "Details of a photo session booking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "instagram": { "type": "string" },
+        "email": { "type": "string" },
+        "eventType": { "type": "string" },
+        "packageName": { "type": "string" },
+        "duration": { "type": "string" },
+        "eventDate": { "type": "string" },
+        "eventTime": { "type": "string" },
+        "venue": { "type": "string" },
+        "price": { "type": "number" },
+        "discount": { "type": "number" },
+        "additionalServices": { "type": "string" },
+        "specialNotes": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "assignedPhotographer": { "type": "string" },
+        "invoice": { "type": "object" },
+        "payments": { "type": "object" },
+        "timeline": { "type": "array" },
+        "checklist": { "type": "array" },
+        "gallery": { "type": "object" },
+        "delivery": { "type": "object" },
+        "notes": { "type": "string" },
+        "googleCalendarEventId": { "type": "string" },
+        "contractAgreed": { "type": "boolean" }
+      },
+      "required": [
+        "id",
+        "clientName",
+        "eventType",
+        "packageName",
+        "eventDate",
+        "price",
+        "status",
+        "createdAt"
+      ]
+    },
+    "StudioSettings": {
+      "title": "StudioSettings",
+      "description": "Customized studio settings and configuration",
+      "type": "object",
+      "properties": {
+        "studioName": { "type": "string" },
+        "instagram": { "type": "string" },
+        "whatsApp": { "type": "string" },
+        "shopeepayAccount": { "type": "string" },
+        "briAccount": { "type": "string" },
+        "bcaAccount": { "type": "string" },
+        "language": { "type": "string" }
+      },
+      "required": [
+        "studioName"
+      ]
+    },
+    "StudioPackage": {
+      "title": "StudioPackage",
+      "description": "Studio pricing and services packages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "eventType": { "type": "string" },
+        "duration": { "type": "string" },
+        "price": { "type": "number" },
+        "features": { "type": "array" },
+        "popular": { "type": "boolean" }
+      },
+      "required": [
+        "id",
+        "title",
+        "eventType",
+        "price",
+        "features"
+      ]
+    }
+  },
+  "firestore": {
+    "users/{uid}/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "User specific bookings subcollection"
+    },
+    "users/{uid}/settings/studioSettings": {
+      "schema": "StudioSettings",
+      "description": "User specific studio settings"
+    },
+    "users/{uid}/packages/{packageId}": {
+      "schema": "StudioPackage",
+      "description": "User specific custom packages subcollection"
+    }
+  }
+}

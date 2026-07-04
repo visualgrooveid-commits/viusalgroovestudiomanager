@@ -1,0 +1,119 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* Pure Print CSS for pixel-perfect A4 printing */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  /* Universal print color and exact background adjust */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm;
+    height: 297mm;
+    font-size: 11pt;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  }
+
+  /* Hide absolutely everything except the print wrapper container */
+  body > *:not(.print-wrapper-target) {
+    display: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force print target container styles to fill A4 */
+  .print-wrapper-target {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Prevent awkward page cuts in table rows, headers, and cards */
+  h1, h2, h3, h4, h5, h6, table, tr, img, .invoice-block, .border, .rounded-2xl {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Print Text Contrast Rules: Replace light gray UI colors with high contrast values */
+  
+  /* Primary Text: #000000 */
+  .text-slate-900, .text-neutral-900, .text-black, .text-slate-800, .text-neutral-800, h1, h2, h3, h4, h5, h6, th {
+    color: #000000 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Secondary Text: #333333 */
+  .text-slate-700, .text-neutral-700, .text-slate-600, .text-neutral-600, td {
+    color: #333333 !important;
+  }
+
+  /* Muted Text: #555555 (Never lighter than #666666 for general muted text) */
+  .text-slate-500, .text-neutral-500, .text-slate-400, .text-neutral-400, .text-slate-300, .text-neutral-300 {
+    color: #555555 !important;
+  }
+
+  /* Borders: #666666 (Ensure sharp, clear dividers) */
+  .border, .border-t, .border-b, .border-l, .border-r, .border-slate-200, .border-slate-100, .border-neutral-200, .border-neutral-100, hr {
+    border-color: #666666 !important;
+    border-width: 1px !important;
+  }
+
+  /* BG Color Adjustments for printing (light gray containers to keep contrast) */
+  .bg-slate-50, .bg-neutral-50, .bg-slate-50\/50, .bg-slate-50\/30 {
+    background-color: #f4f4f5 !important;
+  }
+
+  .bg-slate-900 {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .bg-emerald-50 {
+    background-color: #f0fdf4 !important;
+    border-color: #666666 !important;
+  }
+
+  .bg-blue-50 {
+    background-color: #eff6ff !important;
+    border-color: #666666 !important;
+  }
+
+  .bg-amber-50 {
+    background-color: #fffbeb !important;
+    border-color: #666666 !important;
+  }
+
+  /* Watermark print visibility: Subtle but readable */
+  .watermark-text, [class*="opacity-[0.03]"], [class*="opacity-[0.04]"], [class*="opacity-[0.05]"] {
+    opacity: 0.04 !important;
+    color: #000000 !important;
+  }
+}
