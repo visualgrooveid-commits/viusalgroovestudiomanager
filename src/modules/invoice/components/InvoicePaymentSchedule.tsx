@@ -13,7 +13,7 @@ interface InvoicePaymentScheduleProps {
 }
 
 export default function InvoicePaymentSchedule({ booking }: InvoicePaymentScheduleProps) {
-  const { totalDue, dpAmount, remainingAmount, isPaid, isDPPaid } = calculateInvoiceTotals(booking);
+  const { totalDue, dpAmount, remainingAmount, dpPercent, remainingPercent, isPaid, isDPPaid } = calculateInvoiceTotals(booking);
 
   // Parse dates safely
   const formatDateStr = (dateStr: string) => {
@@ -33,8 +33,8 @@ export default function InvoicePaymentSchedule({ booking }: InvoicePaymentSchedu
   const milestones = [
     {
       id: "down-payment",
-      name: "Milestone 1: Down Payment (DP)",
-      percentage: "40%",
+      name: `Milestone 1: Down Payment (DP) (${dpPercent}%)`,
+      percentage: `${dpPercent}%`,
       amount: dpAmount,
       dueDate: formatDateStr(booking.invoice.issuedDate),
       isPaid: isDPPaid || isPaid,
@@ -42,8 +42,8 @@ export default function InvoicePaymentSchedule({ booking }: InvoicePaymentSchedu
     },
     {
       id: "remaining-payment",
-      name: "Milestone 2: Pelunasan Sisa",
-      percentage: "60%",
+      name: `Milestone 2: Pelunasan Sisa (${remainingPercent}%)`,
+      percentage: `${remainingPercent}%`,
       amount: remainingAmount,
       dueDate: formatDateStr(booking.invoice.dueDate),
       isPaid: isPaid,
