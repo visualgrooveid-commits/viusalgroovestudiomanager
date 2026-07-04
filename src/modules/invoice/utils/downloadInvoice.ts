@@ -4,7 +4,7 @@
  */
 
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import { Booking } from "../../../types";
 import { getInvoiceFilename, InvoiceDocType } from "./invoiceHelpers";
 
