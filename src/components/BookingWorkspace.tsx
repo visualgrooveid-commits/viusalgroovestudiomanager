@@ -243,6 +243,15 @@ export default function BookingWorkspace({
     });
   };
 
+  const handleDueDateChange = (newDueDate: string) => {
+    triggerUpdate({
+      invoice: {
+        ...booking.invoice,
+        dueDate: newDueDate
+      }
+    });
+  };
+
   const handleMarkDPPaid = () => {
     const dpAmt = booking.payments.dpAmount || Math.round(totalDue * 0.4);
     const remainingAmt = totalDue - dpAmt;
@@ -993,6 +1002,23 @@ export default function BookingWorkspace({
               <div className="space-y-1">
                 <h2 className="text-xl font-serif font-medium text-neutral-900">Payment Milestones Log</h2>
                 <p className="text-xs text-neutral-400">Update project accounting states and down payment locks</p>
+              </div>
+
+              {/* Due Date Editor */}
+              <div className="bg-neutral-50 p-5 rounded-2xl border border-neutral-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <label className="text-[11px] font-semibold text-neutral-600 block mb-1">
+                    Tenggat Waktu (Due Date)
+                  </label>
+                  <p className="text-[10px] text-neutral-400">Tanggal ini muncul di invoice sebagai batas waktu pelunasan</p>
+                </div>
+                <input
+                  type="date"
+                  value={booking.invoice.dueDate}
+                  disabled={isPaid}
+                  onChange={(e) => handleDueDateChange(e.target.value)}
+                  className="bg-white disabled:bg-neutral-100 disabled:text-neutral-500 border border-neutral-200 rounded-xl px-4 py-2 text-sm text-neutral-800 focus:outline-none focus:border-neutral-900 font-mono"
+                />
               </div>
 
               {/* Status Indicator Panel */}
