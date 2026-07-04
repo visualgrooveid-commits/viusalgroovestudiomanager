@@ -32,17 +32,8 @@ export default function InvoicePaymentSchedule({ booking }: InvoicePaymentSchedu
   // Milestones schedule data
   const milestones = [
     {
-      id: "booking-fee",
-      name: "Milestone 1: Booking Fee (Lock Date)",
-      percentage: "10%",
-      amount: dpAmount * 0.25, // Assuming booking fee is 25% of Down Payment or flat rate
-      dueDate: "Saat Booking",
-      isPaid: isDPPaid || isPaid,
-      color: "emerald"
-    },
-    {
       id: "down-payment",
-      name: "Milestone 2: Down Payment (DP)",
+      name: "Milestone 1: Down Payment (DP)",
       percentage: "40%",
       amount: dpAmount,
       dueDate: formatDateStr(booking.invoice.issuedDate),
@@ -51,7 +42,7 @@ export default function InvoicePaymentSchedule({ booking }: InvoicePaymentSchedu
     },
     {
       id: "remaining-payment",
-      name: "Milestone 3: Pelunasan Sisa",
+      name: "Milestone 2: Pelunasan Sisa",
       percentage: "60%",
       amount: remainingAmount,
       dueDate: formatDateStr(booking.invoice.dueDate),
